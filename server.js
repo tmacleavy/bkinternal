@@ -8,15 +8,6 @@ const express = require('express');
 // https://www.npmjs.com/package/body-parser
 const bodyParser = require('body-parser');
 
-<<<<<<< HEAD
-// create a Firestore - NoSQL Database
-const Firestore = require('@google-cloud/firestore');
-
-const db = new Firestore({
-    projectid: process.env.GOOGLE_CLOUD_PROJECT
-});
-=======
->>>>>>> d881da0132eb8e57971fa46fb7a77a9e24ecad19
 // create the server
 const app = express();
 
@@ -28,20 +19,13 @@ app.use(bodyParser.json());
 const mockEvents = {
     events: [
         { title: 'an event', id: 1, description: 'something really cool' },
-<<<<<<< HEAD
-//        { title: 'another event', id: 2, description: 'something even cooler' }
-=======
         { title: 'another event', id: 2, description: 'something even cooler' }
->>>>>>> d881da0132eb8e57971fa46fb7a77a9e24ecad19
     ]
 };
 
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> d881da0132eb8e57971fa46fb7a77a9e24ecad19
 // health endpoint - returns an empty array
 app.get('/', (req, res) => {
     res.json([]);
@@ -53,21 +37,9 @@ app.get('/version', (req, res) => {
 });
 
 
-<<<<<<< HEAD
-
-//@param {object} mockEvents
 // mock events endpoint. this would be replaced by a call to a datastore
 // if you went on to develop this as a real application.
 app.get('/events', (req, res) => {
-//    datastore.save({
-//    key: datastore.key('req'),
-//    data: req,
-//  })
-=======
-// mock events endpoint. this would be replaced by a call to a datastore
-// if you went on to develop this as a real application.
-app.get('/events', (req, res) => {
->>>>>>> d881da0132eb8e57971fa46fb7a77a9e24ecad19
     res.json(mockEvents);
 });
 
@@ -83,17 +55,6 @@ app.post('/event', (req, res) => {
      }
     // add to the mock array
     mockEvents.events.push(ev);
-<<<<<<< HEAD
-
-    db.collection("events")
-        .add(ev)
-        .then((ret) => {
-            console.log(ret);
-        });
-
-
-=======
->>>>>>> d881da0132eb8e57971fa46fb7a77a9e24ecad19
     // return the complete array
     res.json(mockEvents);
 });
@@ -103,7 +64,8 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message });
 });
 
-const PORT = 8082;
+const PORT = (process.env.PORT ? process.env.PORT : 8082)
+console.log(`PORT equals ${PORT}`)
 const server = app.listen(PORT, () => {
     const host = server.address().address;
     const port = server.address().port;

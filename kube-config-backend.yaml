@@ -17,11 +17,8 @@ spec:
     spec:
       containers:
       - name: events-data
-<<<<<<< HEAD
-        image: gcr.io/dtc-user107/internal-image:v1.0.0
-=======
         image: gcr.io/dtc-user119/internal-image:v1.0.0
->>>>>>> d881da0132eb8e57971fa46fb7a77a9e24ecad19
+        
         env:
         - name: PORT
           value: "8082"
