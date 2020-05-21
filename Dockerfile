@@ -6,12 +6,6 @@ COPY . /app/
 # Change the working directory
 WORKDIR /app
 # Install dependencies.
-RUN npm instal
-# Copy application code.
-COPY . /app
-# Change the working directory
-WORKDIR /app
-# Install dependencies.
-RUN npm install
+RUN npm Install
 # Start the Express app
 CMD ["node", "server.js"]
