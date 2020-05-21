@@ -8,6 +8,12 @@ const express = require('express');
 // https://www.npmjs.com/package/body-parser
 const bodyParser = require('body-parser');
 
+// create a Firestore - NoSQL Database
+const Firestore = require('@google-cloud/firestore');
+
+const db = new Firestore({
+    projectid: process.env.GOOGLE_CLOUD_PROJECT
+});
 // create the server
 const app = express();
 
@@ -19,11 +25,9 @@ app.use(bodyParser.json());
 const mockEvents = {
     events: [
         { title: 'an event', id: 1, description: 'something really cool' },
-        { title: 'another event', id: 2, description: 'something even cooler' }
+//        { title: 'another event', id: 2, description: 'something even cooler' }
     ]
 };
-
-
 
 
 // health endpoint - returns an empty array
@@ -37,9 +41,15 @@ app.get('/version', (req, res) => {
 });
 
 
+
+//@param {object} mockEvents
 // mock events endpoint. this would be replaced by a call to a datastore
 // if you went on to develop this as a real application.
 app.get('/events', (req, res) => {
+//    datastore.save({
+//    key: datastore.key('req'),
+//    data: req,
+//  })
     res.json(mockEvents);
 });
 
@@ -55,6 +65,14 @@ app.post('/event', (req, res) => {
      }
     // add to the mock array
     mockEvents.events.push(ev);
+
+    db.collection("events")
+        .add(ev)
+        .then((ret) => {
+            console.log(ret);
+        });
+
+
     // return the complete array
     res.json(mockEvents);
 });
