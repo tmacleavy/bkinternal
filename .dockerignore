@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 # add git-ignore syntax here of things you don't want copied into docker image
+=======
+>>>>>>> d881da0132eb8e57971fa46fb7a77a9e24ecad19
 .git
 *Dockerfile*
 *docker-compose*
 node_modules
+<<<<<<< HEAD
+=======
+
+>>>>>>> d881da0132eb8e57971fa46fb7a77a9e24ecad19
